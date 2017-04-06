@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity
         FormBody.Builder form = new FormBody.Builder();
         //建立请求体
         RequestBody requestBody = form.build();
+        //请求
         final Request request = new Request.Builder().url("http://app.kxjie.cn/index.php/API/Red/index")
                 .post(requestBody).addHeader("Connection", "close").build();
         client.newCall(request).enqueue(new okhttp3.Callback() {
@@ -166,7 +167,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
