@@ -19,9 +19,7 @@ public class HomeListDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_list_details);
         imageView = (ImageView) findViewById(R.id.ivImage);
-        // StatusBarUtil.setTranslucent(this);
         StatusBarUtil.setTranslucentForCoordinatorLayout(this, 0);
-        //Toolbar
         setToolBar();
         setSecondTitle();
     }

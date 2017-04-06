@@ -136,9 +136,13 @@ public class MainActivity extends AppCompatActivity
         client.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String result = response.body().string();
