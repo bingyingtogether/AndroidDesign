@@ -526,7 +526,6 @@ public class StatusBarUtil {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-
     /**
      * 创建半透明矩形 View
      *

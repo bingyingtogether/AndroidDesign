@@ -20,6 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a','x86_64'
+            universalApk true
+        }
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -38,5 +46,5 @@ dependencies {
     compile 'org.xutils:xutils:3.4.0'
     compile 'com.android.support:cardview-v7:25.3.0'
     compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
-
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
 }

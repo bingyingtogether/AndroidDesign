@@ -38,15 +38,21 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerClickListener;
 
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SHSwipeRefreshLayout.SHSOnRefreshListener, AdapterView.OnItemClickListener {
+    private static final String TRANSLATE_VIEW = "sharedView";
     private SHListView recyclerView;
     private SHSwipeRefreshLayout refreshLayout;
     private List<RedModel.Data.Red> list;
@@ -54,18 +60,17 @@ public class MainActivity extends AppCompatActivity
     private HomeListAdapter homeListAdapter;
     private int state = 0;
     private int flag = 0;
+    private DrawerLayout drawer;
     //头布局Banner图
     private View view;
     private Banner banner;
     private List<Integer> bannerImages;
     private int[] images = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f, R.drawable.g};
-    private static final String TRANSLATE_VIEW = "sharedView";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarUtil.setTransparent(this);
         setDrawLayout();
         initViews();
         addListHeader();
@@ -76,7 +81,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawer, getResources().getColor(R.color.holo_green_dark));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -119,38 +125,40 @@ public class MainActivity extends AppCompatActivity
 
     //网络请求
     public void getRedData() {
-        RequestParams params = new RequestParams("http://app.kxjie.cn/index.php/API/Red/index");
-        x.http().get(params, new Callback.CommonCallback<String>() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        OkHttpClient client = builder.connectTimeout(20, TimeUnit.SECONDS).build();
+        //建立拼接表单
+        FormBody.Builder form = new FormBody.Builder();
+        //建立请求体
+        RequestBody requestBody = form.build();
+        final Request request = new Request.Builder().url("http://app.kxjie.cn/index.php/API/Red/index")
+                .post(requestBody).addHeader("Connection", "close").build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
-            public void onSuccess(String result) {
-                Log.e("result", result);
-                Gson gson = new Gson();
-                RedModel redModel = gson.fromJson(result.toString(), RedModel.class);
-                list = redModel.getData().getRed();
-                if (state == 0) {
-                    adapter.setList(list);
-                    homeListAdapter.setList(list);
-                } else if (state == 1) {
-                    adapter.setList(list);
-                    homeListAdapter.setList(list);
-                    refreshLayout.finishRefresh();
-                }
+            public void onFailure(Call call, IOException e) {
+
             }
 
             @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e("ex", ex.getMessage());
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFinished() {
-
+            public void onResponse(Call call, Response response) throws IOException {
+                final String result = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("result", result);
+                        Gson gson = new Gson();
+                        RedModel redModel = gson.fromJson(result.toString(), RedModel.class);
+                        list = redModel.getData().getRed();
+                        if (state == 0) {
+                            adapter.setList(list);
+                            homeListAdapter.setList(list);
+                        } else if (state == 1) {
+                            adapter.setList(list);
+                            homeListAdapter.setList(list);
+                            refreshLayout.finishRefresh();
+                        }
+                    }
+                });
             }
         });
     }

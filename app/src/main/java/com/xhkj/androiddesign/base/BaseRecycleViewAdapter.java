@@ -31,16 +31,18 @@ public class BaseRecycleViewAdapter<T, K extends ViewDataBinding> extends Recycl
         return holder;
     }
 
-   public void setLists(List<T> lists){
-       this.lists = lists;
-       notifyDataSetChanged();
-   }
+    public void setLists(List<T> lists) {
+        this.lists = lists;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(BaseViewHolder<K> holder, int position) {
         T data = lists.get(position);//获取数据
         holder.getDataBing().setVariable(variableId, data);//赋值
         holder.getDataBing().executePendingBindings();//刷新界面
     }
+
     @Override
     public int getItemCount() {
         return lists == null ? 0 : lists.size();

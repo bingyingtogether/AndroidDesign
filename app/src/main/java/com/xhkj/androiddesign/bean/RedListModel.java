@@ -9,6 +9,7 @@ import java.util.List;
 public class RedListModel {
     private String status;
     private String info;
+    private Data data;
 
     public Data getData() {
         return data;
@@ -34,9 +35,9 @@ public class RedListModel {
         this.info = info;
     }
 
-    private Data data;
-
     public static class Data {
+        private List<Red> red;
+
         public List<Red> getRed() {
             return red;
         }
@@ -44,8 +45,6 @@ public class RedListModel {
         public void setRed(List<Red> red) {
             this.red = red;
         }
-
-        private List<Red> red;
 
         public static class Red {
             private String red_id;
@@ -58,6 +57,7 @@ public class RedListModel {
             private String sort;
             private String check_time;
             private String add_time;
+            private String red_type;
 
             public String getRed_id() {
                 return red_id;
@@ -67,7 +67,6 @@ public class RedListModel {
                 this.red_id = red_id;
             }
 
-
             public String getRed_name() {
                 return red_name;
             }
@@ -75,7 +74,6 @@ public class RedListModel {
             public void setRed_name(String red_name) {
                 this.red_name = red_name;
             }
-
 
             public String getRed_img() {
                 return red_img;
@@ -108,7 +106,6 @@ public class RedListModel {
             public void setRed_surplus_money(String red_surplus_money) {
                 this.red_surplus_money = red_surplus_money;
             }
-
 
             public String getFirm_name() {
                 return firm_name;
@@ -149,8 +146,6 @@ public class RedListModel {
             public void setRed_type(String red_type) {
                 this.red_type = red_type;
             }
-
-            private String red_type;
         }
     }
 

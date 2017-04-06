@@ -7,7 +7,13 @@
         <item name="colorPrimaryDark">@android:color/holo_green_dark</item>
         <item name="colorAccent">@android:color/holo_green_dark</item>
     </style>
-
+    <!-- Base application theme. -->
+    <style name="CoorTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/holo_green_dark</item>
+        <item name="colorPrimaryDark">@android:color/holo_green_dark</item>
+        <item name="colorAccent">@android:color/holo_green_dark</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

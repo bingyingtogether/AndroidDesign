@@ -9,7 +9,7 @@ import android.view.View;
  * itemView相当于之前的ContentView
  * Created by yzy on 2016/9/26.
  */
-public class BaseViewHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder{
+public class BaseViewHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
     private T dataBing;
 
     public BaseViewHolder(View itemView) {

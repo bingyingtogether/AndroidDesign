@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeListDetailsActivity"></activity>
+        <activity
+            android:name=".activity.HomeListDetailsActivity"
+            android:theme="@style/CoorTheme"></activity>
     </application>
 
 </manifest>

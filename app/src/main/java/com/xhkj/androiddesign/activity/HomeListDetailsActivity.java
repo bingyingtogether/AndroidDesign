@@ -12,12 +12,14 @@ import com.xhkj.androiddesign.R;
 import com.xhkj.androiddesign.utils.StatusBarUtil;
 
 public class HomeListDetailsActivity extends AppCompatActivity {
+    private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_list_details);
-        StatusBarUtil.setTransparent(this);
-        //Toolbar
+        imageView = (ImageView) findViewById(R.id.ivImage);
+        StatusBarUtil.setTranslucentForCoordinatorLayout(this, 0);SS
         setToolBar();
         setSecondTitle();
     }
@@ -33,6 +35,7 @@ public class HomeListDetailsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
     }
 
     //使用CollapsingToolbarLayout后，title需要设置到CollapsingToolbarLayout上

@@ -24,9 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/write"
-            android:listSelector="@color/write"
             android:divider="@color/write"
             android:dividerHeight="0dp"
+            android:listSelector="@color/write"
             android:scrollbars="none"></com.scu.miomin.shswiperefresh.view.SHListView>
     </com.scu.miomin.shswiperefresh.core.SHSwipeRefreshLayout>
 </RelativeLayout>

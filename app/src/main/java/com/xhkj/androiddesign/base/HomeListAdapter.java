@@ -65,12 +65,12 @@ public class HomeListAdapter extends BaseAdapter {
         }
         Glide.with(context).load(list.get(position).getRed_img()).into(viewHolder.imageView);
         viewHolder.title.setText(list.get(position).getFirm_name());
-       viewHolder.content.setText(list.get(position).getRed_name());
+        viewHolder.content.setText(list.get(position).getRed_name());
         return convertView;
     }
 
     class ViewHolder {
-         ImageView imageView;
-         TextView title, content;
+        ImageView imageView;
+        TextView title, content;
     }
 }  

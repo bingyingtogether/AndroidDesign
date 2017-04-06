@@ -14,6 +14,7 @@ import java.util.List;
 public class RedModel {
     private String status;
     private String info;
+    private Data data;
 
     public Data getData() {
         return data;
@@ -39,9 +40,9 @@ public class RedModel {
         this.info = info;
     }
 
-    private Data data;
-
     public static class Data {
+        private List<Red> red;
+
         public List<Red> getRed() {
             return red;
         }
@@ -49,8 +50,6 @@ public class RedModel {
         public void setRed(List<Red> red) {
             this.red = red;
         }
-
-        private List<Red> red;
 
         public static class Red {
             private String red_id;
@@ -63,6 +62,18 @@ public class RedModel {
             private String sort;
             private String check_time;
             private String add_time;
+            private String red_type;
+
+            public Red(String red_name, String red_img, String firm_name) {
+                this.red_name = red_name;
+                this.red_img = red_img;
+                this.firm_name = firm_name;
+            }
+
+            @BindingAdapter("red_img")
+            public static void getInternetImage(ImageView imageView, String img) {
+                Glide.with(imageView.getContext()).load(img).into(imageView);
+            }
 
             public String getRed_id() {
                 return red_id;
@@ -72,7 +83,6 @@ public class RedModel {
                 this.red_id = red_id;
             }
 
-
             public String getRed_name() {
                 return red_name;
             }
@@ -80,7 +90,6 @@ public class RedModel {
             public void setRed_name(String red_name) {
                 this.red_name = red_name;
             }
-
 
             public String getRed_img() {
                 return red_img;
@@ -113,7 +122,6 @@ public class RedModel {
             public void setRed_surplus_money(String red_surplus_money) {
                 this.red_surplus_money = red_surplus_money;
             }
-
 
             public String getFirm_name() {
                 return firm_name;
@@ -153,19 +161,6 @@ public class RedModel {
 
             public void setRed_type(String red_type) {
                 this.red_type = red_type;
-            }
-
-            private String red_type;
-
-            public Red(String red_name, String red_img, String firm_name) {
-                this.red_name = red_name;
-                this.red_img = red_img;
-                this.firm_name = firm_name;
-            }
-
-            @BindingAdapter("red_img")
-            public static void getInternetImage(ImageView imageView, String img) {
-                Glide.with(imageView.getContext()).load(img).into(imageView);
             }
         }
     }
