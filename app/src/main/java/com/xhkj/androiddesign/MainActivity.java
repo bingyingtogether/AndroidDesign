@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity
         homeListAdapter = new HomeListAdapter(this, list);
         recyclerView.setAdapter(adapter);
         getRedData();
+        
     }
 
     //网络请求
