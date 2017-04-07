@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
     //实例化主页面view
     public void initViews() {
         recyclerView = (SHListView) findViewById(R.id.recyclerView);
@@ -121,7 +120,6 @@ public class MainActivity extends AppCompatActivity
         homeListAdapter = new HomeListAdapter(this, list);
         recyclerView.setAdapter(adapter);
         getRedData();
-
     }
 
     //网络请求
