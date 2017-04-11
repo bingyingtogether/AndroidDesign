@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".activity.HomeListDetailsActivity"
-            android:theme="@style/CoorTheme"></activity>
+           ></activity>
     </application>
 
 </manifest>
