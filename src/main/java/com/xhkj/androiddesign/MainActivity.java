@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
     //实例化主页面view
     public void initViews() {
         recyclerView = (SHListView) findViewById(R.id.recyclerView);
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String result = response.body().string();
@@ -166,6 +168,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -275,6 +278,7 @@ public class MainActivity extends AppCompatActivity
         banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
+                Toast.makeText(MainActivity.this, position + "", Toast.LENGTH_SHORT).show();
             }
         });
         banner.start();

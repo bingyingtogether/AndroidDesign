@@ -29,7 +29,6 @@ public class MyBaseAdapter<T> extends BaseAdapter {
         this.list = list;
         notifyDataSetChanged();
     }
-
     public void addList(List<T> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
